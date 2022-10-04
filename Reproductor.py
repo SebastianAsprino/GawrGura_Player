@@ -1,2 +1,3 @@
-print("el codigo del reproductor")
-#esta es una linea de texto probando .git
+from tkinter import *
+ventana = Tk()
+ventana.mainloop()
