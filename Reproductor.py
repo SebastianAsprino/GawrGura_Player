@@ -1,11 +1,20 @@
 from tkinter import *
 import tkinter as tk
+import tkinter as ttk
 ventana = Tk()
 ventana.title("Music Player")
 ventana.geometry("800x600")
 ventana.iconbitmap(".image\gura.ico")
 ventana.config(bg="black")
 ventana.resizable(0,0)
-boton = tk.Button (text= ":D")
-boton.place(x=50, y=50 )
+buscar  = tk.Button (text= "🔍 Buscar ")
+buscar.place(x=170, y=10 )
+play = tk.Button (text= "▶️")
+play.place(x=650, y=250 )
+backtrack = tk.Button (text= "⏮️")
+backtrack.place(x=620, y=250 )
+nexttrack = tk.Button (text= "⏭️")
+nexttrack.place(x=690, y=250 )
+buscar = ttk.Entry()
+buscar.place(x=30, y=12)
 ventana.mainloop()
