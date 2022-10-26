@@ -22,6 +22,8 @@ window = Tk()
 
 window.geometry("800x600")
 window.configure(bg = "#24324E")
+window.title("Music Player")
+window.iconbitmap(".image\gura.ico")
 
 
 canvas = Canvas(
