@@ -5,12 +5,15 @@
 
 from cgitb import text
 from email.mime import image
-from pathlib import Path
+from pathlib import Path# draw_rounded_rectangle.py
+from PIL import Image, ImageTk
+from matplotlib import image
 
 # from tkinter import *
 # Explicit imports to satisfy Flake8
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 from turtle import width
+import tkinter as tk
 
 
 OUTPUT_PATH = Path(__file__).parent
@@ -21,15 +24,15 @@ def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
 
-window = Tk()
+window = tk.Tk()
 
-window.geometry("1000x750")
+window.geometry('1000x750')
 window.configure(bg = "#FFFFFF")
 window.title("Music Player")
 window.iconbitmap(".image\gura.ico")
 
 
-canvas = Canvas(
+canvas = tk.Canvas(
     window,
     bg = "#FFFFFF",
     height = 750,
@@ -112,14 +115,14 @@ image_1 = canvas.create_image(
 )
 
 canvas.place(x = 0, y = 0)
-dot_image_1 = PhotoImage(
+dot_image_1 = ImageTk.PhotoImage(
     file=relative_to_assets("dot_1.png"))
 dot_1 = Button(
     image=dot_image_1,
     borderwidth=0,
     highlightthickness=0,
     command=lambda: print("dot_1 clicked"),
-    relief="flat"
+    relief="flat",
 )
 dot_1.place(
     x=786.5,
@@ -128,37 +131,14 @@ dot_1.place(
     height=27.0
 )
 
-button_image_2 = PhotoImage(
-    file=relative_to_assets("button_2.png"))
-button_2 = Button(
-    image=button_image_2,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_2 clicked"),
-    relief="sunken"
-)
-button_2.place(
-    x=540.0,
-    y=37.0,
-    width=85.0,
-    height=45.0
-)
+Button_image_2 = ImageTk.PhotoImage(Image.open("build_demo1/assets/button_2.png"))
+button_2 = canvas.create_image(580, 57, image=Button_image_2, tag='Button_2')
+canvas.tag_bind(button_2, "<Button>", lambda event: print('Button_2 clicked'))
 
-button_image_1 = PhotoImage(
-    file=relative_to_assets("button_1.png"))
-button_1 = Button(
-    image=button_image_1,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_1 clicked"),
-    relief="sunken"
-)
-button_1.place(
-    x=500.0,
-    y=37.0,
-    width=85.0,
-    height=45.0
-)
+button_image_1 = ImageTk.PhotoImage(Image.open("build_demo1/assets/button_1.png"))
+button_1 = canvas.create_image(540,57, image=button_image_1, tag='Button_1')
+canvas.tag_bind(button_1, "<Button>", lambda event: print('Button_1 clicked'))
+
 
 button_image_7 = PhotoImage(
     file=relative_to_assets("button_7.png"))
