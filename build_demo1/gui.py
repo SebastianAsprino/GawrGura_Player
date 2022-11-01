@@ -5,7 +5,7 @@
 
 from cgitb import text
 from email.mime import image
-from pathlib import Path# draw_rounded_rectangle.py
+from pathlib import Path
 from PIL import Image, ImageTk
 from matplotlib import image
 
@@ -26,7 +26,7 @@ def relative_to_assets(path: str) -> Path:
 
 window = tk.Tk()
 
-window.geometry('1000x750')
+window.geometry('800x600')
 window.configure(bg = "#FFFFFF")
 window.title("Music Player")
 window.iconbitmap(".image\gura.ico")
@@ -35,189 +35,122 @@ window.iconbitmap(".image\gura.ico")
 canvas = tk.Canvas(
     window,
     bg = "#FFFFFF",
-    height = 750,
-    width = 1000,
+    height = 800,
+    width = 800,
     bd = 0,
     highlightthickness = 0,
     relief = "ridge"
 )
 
+#FONDO
 canvas.place(x = 0, y = 0)
-image_image_1 = PhotoImage(
+image_image_1 = ImageTk.PhotoImage(
     file=relative_to_assets("image_1.png"))
 image_1 = canvas.create_image(
-    500.0,
-    375.0,
+    400.0,
+    300.0,
     image=image_image_1
 )
 
+#PORTADA
 canvas.place(x = 0, y = 0)
-image_image_2 = PhotoImage(
+image_image_2 = ImageTk.PhotoImage(
     file=relative_to_assets("image_2.png"))
 image_1 = canvas.create_image(
-    800.0,
-    195.0,
+    640.0,
+    156.0,
     image=image_image_2
 )
 
+#NOMBRE
 canvas.create_text(
-    675.0,
-    382.0,
+    540.0,
+    296.7,
     anchor="nw",
     text="05 - Lullaby",
     fill="#FFFFFF",
-    font=("Inter", 30 * -1)
+    font=("Inter", 18)
 )
 
+#ARTISTA
 canvas.create_text(
-    675.0,
-    429.4,
+    540.0,
+    334.6,
     anchor="nw",
     text="Snail’s House",
     fill="#FFFFFF",
-    font=("Inter", 30 * -1)
+    font=("Inter", 18)
 )
 
+#ALBUM
 canvas.create_text(
-    675.0,
-    476.2,
+    540.0,
+    372.1,
     anchor="nw",
     text="Ordinary Songs 3",
     fill="#FFFFFF",
-    font=("Inter", 30 * -1)
+    font=("Inter", 18)
 )
 
+#AÑO
 canvas.create_text(
-    675.0,
-    523.1,
+    540.0,
+    407.9,
     anchor="nw",
     text="2017",
     fill="#FFFFFF",
-    font=("Inter", 30 * -1)
+    font=("Inter", 18)
 )
 
 canvas.place(x = 0, y = 0)
-bar_image_1 = PhotoImage(
-    file=relative_to_assets("bar_1.png"))
-image_1 = canvas.create_image(
-    800.0,
-    577.8,
-    image=bar_image_1
-)
+bar_image_1 = ImageTk.PhotoImage(file=relative_to_assets("bar_1.png"))
+image_1 = canvas.create_image(640.0, 462.2, image=bar_image_1)
 
 canvas.place(x = 0, y = 0)
-bar_image_2 = PhotoImage(
-    file=relative_to_assets("bar_2.png"))
-image_1 = canvas.create_image(
-    800.0,
-    577.8,
-    image=bar_image_2,
-)
+bar_image_2 = ImageTk.PhotoImage(file=relative_to_assets("bar_2.png"))
+image_1 = canvas.create_image(640.0, 462.2, image=bar_image_2)
 
-canvas.place(x = 0, y = 0)
-dot_image_1 = ImageTk.PhotoImage(
-    file=relative_to_assets("dot_1.png"))
-dot_1 = Button(
-    image=dot_image_1,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("dot_1 clicked"),
-    relief="flat",
-)
-dot_1.place(
-    x=786.5,
-    y=564.3,
-    width=27.0,
-    height=27.0
-)
+dot_image_2 = ImageTk.PhotoImage(file=relative_to_assets("dot_1.png"))
+dot_1 = canvas.create_image(561.6, 462.2, image=dot_image_2, tag='Dot_1')
+canvas.tag_bind(dot_1, "<Button>", lambda event: print('Dot_1 clicked'))
 
-Button_image_2 = ImageTk.PhotoImage(Image.open("build_demo1/assets/button_2.png"))
-button_2 = canvas.create_image(580, 57, image=Button_image_2, tag='Button_2')
+#SPOTIFY
+button_image_2 = ImageTk.PhotoImage(file=relative_to_assets("button_2.png"))
+button_2 = canvas.create_image(464, 45.6, image=button_image_2, tag='Button_2')
 canvas.tag_bind(button_2, "<Button>", lambda event: print('Button_2 clicked'))
 
-button_image_1 = ImageTk.PhotoImage(Image.open("build_demo1/assets/button_1.png"))
-button_1 = canvas.create_image(540,57, image=button_image_1, tag='Button_1')
+#YOUTUBE
+button_image_1 = ImageTk.PhotoImage(file=relative_to_assets("button_1.png"))
+button_1 = canvas.create_image(432, 45.6, image=button_image_1, tag='Button_1')
 canvas.tag_bind(button_1, "<Button>", lambda event: print('Button_1 clicked'))
 
+#BARRA BUSQUEDA
+entry_image_1 = ImageTk.PhotoImage(file=relative_to_assets("entry_1.png"))
+entry_bg_1 = canvas.create_image(224, 45.6, image=entry_image_1)
 
-button_image_7 = PhotoImage(
-    file=relative_to_assets("button_7.png"))
-button_1 = Button(
-    image=button_image_7,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_7 clicked"),
-    relief="sunken"
-)
-button_1.place(
-    x=20.0,
-    y=37.0,
-    width=55.0,
-    height=45.0
-)
+#BUSQUEDA
+button_image_7 = ImageTk.PhotoImage(file=relative_to_assets("button_7.png"))
+button_7 = canvas.create_image(36, 45.6, image=button_image_7, tag='Button_7')
+canvas.tag_bind(button_7, "<Button>", lambda event: print('Button_7 clicked'))
 
-entry_image_1 = PhotoImage(
-    file=relative_to_assets("entry_1.png"))
-entry_bg_1 = canvas.create_image(
-    285.0,
-    57.0,
-    image=entry_image_1
-)
+#CANCIONES
+entry_image_2 = PhotoImage(file=relative_to_assets("entry_2.png"))
+entry_bg_2 = canvas.create_image(256, 323.6, image=entry_image_2)
 
-entry_image_2 = PhotoImage(
-    file=relative_to_assets("entry_2.png"))
-entry_bg_2 = canvas.create_image(
-    320.0,
-    404.6,
-    image=entry_image_2
-)
+#ANTERIOR
+button_image_3 = ImageTk.PhotoImage(file=relative_to_assets("button_3.png"))
+button_3 = canvas.create_image(604.5, 493.5, image=button_image_3, tag='Button_3')
+canvas.tag_bind(button_3, "<Button>", lambda event: print('Button_3 clicked'))
 
-button_image_3 = PhotoImage(
-    file=relative_to_assets("button_3.png"))
-button_3 = Button(
-    image=button_image_3,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_3 clicked"),
-    relief="flat"
-)
-button_3.place(
-    x=745.0,
-    y=615.0,
-    width=25.0,
-    height=25.0
-)
+#PAUSA
+button_image_4 = ImageTk.PhotoImage(file=relative_to_assets("button_4.png"))
+button_4 = canvas.create_image(640, 493.5, image=button_image_4, tag='Button_4')
+canvas.tag_bind(button_4, "<Button>", lambda event: print('Button_4 clicked'))
 
-button_image_4 = PhotoImage(
-    file=relative_to_assets("button_4.png"))
-button_4 = Button(
-    image=button_image_4,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_4 clicked"),
-    relief="flat"
-)
-button_4.place(
-    x=775,
-    y=601.9,
-    width=50.0,
-    height=50.0
-)
+#SIGUIENTE
+button_image_6 = ImageTk.PhotoImage(file=relative_to_assets("button_6.png"))
+button_6 = canvas.create_image(675.5, 493.5, image=button_image_6, tag='Button_6')
+canvas.tag_bind(button_6, "<Button>", lambda event: print('Button_6 clicked'))
 
-button_image_6 = PhotoImage(
-    file=relative_to_assets("button_6.png"))
-button_6 = Button(
-    image=button_image_6,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_6 clicked"),
-    relief="flat"
-)
-button_6.place(
-    x=830.0,
-    y=615.0,
-    width=25.0,
-    height=25.0
-)
 window.resizable(False, False)
 window.mainloop()
