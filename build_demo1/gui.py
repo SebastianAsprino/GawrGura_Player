@@ -6,8 +6,11 @@
 from cgitb import text
 from email.mime import image
 from pathlib import Path
-from PIL import Image, ImageTk
+from PIL import Image, ImageTk, ImageDraw, ImageFont
 from matplotlib import image
+
+import io
+from tinytag import TinyTag
 
 # from tkinter import *
 # Explicit imports to satisfy Flake8
@@ -22,7 +25,6 @@ ASSETS_PATH = OUTPUT_PATH / Path("./assets")
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
-
 
 window = tk.Tk()
 
@@ -42,6 +44,16 @@ canvas = tk.Canvas(
     relief = "ridge"
 )
 
+AudioMetadata = TinyTag.get("Music/14-I-Will-Sing.mp3", image=True)
+
+im = AudioMetadata.get_image()
+
+# Make a PIL Image
+pi = Image.open(io.BytesIO(im))
+
+# Save as PNG, or JPEG
+pi.save("build_demo1/assets/cover.png")
+
 #FONDO
 canvas.place(x = 0, y = 0)
 image_image_1 = ImageTk.PhotoImage(
@@ -54,8 +66,9 @@ image_1 = canvas.create_image(
 
 #PORTADA
 canvas.place(x = 0, y = 0)
-image_image_2 = ImageTk.PhotoImage(
-    file=relative_to_assets("image_2.png"))
+image_image_2 = (Image.open('build_demo1/assets/cover.png'))
+resize_image_image_2 = image_image_2.resize((200,200))
+image_image_2 = ImageTk.PhotoImage(resize_image_image_2)
 image_1 = canvas.create_image(
     640.0,
     156.0,
@@ -67,7 +80,7 @@ canvas.create_text(
     540.0,
     296.7,
     anchor="nw",
-    text="05 - Lullaby",
+    text=AudioMetadata.title,
     fill="#FFFFFF",
     font=("Inter", 18)
 )
@@ -77,7 +90,7 @@ canvas.create_text(
     540.0,
     334.6,
     anchor="nw",
-    text="Snail’s House",
+    text=AudioMetadata.artist,
     fill="#FFFFFF",
     font=("Inter", 18)
 )
@@ -87,7 +100,7 @@ canvas.create_text(
     540.0,
     372.1,
     anchor="nw",
-    text="Ordinary Songs 3",
+    text=AudioMetadata.album,
     fill="#FFFFFF",
     font=("Inter", 18)
 )
@@ -97,7 +110,7 @@ canvas.create_text(
     540.0,
     407.9,
     anchor="nw",
-    text="2017",
+    text=AudioMetadata.year,
     fill="#FFFFFF",
     font=("Inter", 18)
 )
