@@ -1,3 +1,4 @@
+"""
 # shows artist info for a URN or URL 
 
 from spotipy.oauth2 import SpotifyClientCredentials
@@ -13,3 +14,9 @@ else:
 sp = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials())
 result = sp.search(search_str)
 pprint.pprint(result)
+"""
+import spotipy
+class api_spotify:
+    """iniciar sesion usuario y buscar canciones para reproducir"""
+    
+
