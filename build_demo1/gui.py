@@ -17,6 +17,7 @@ from tinytag import TinyTag
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 from turtle import width
 import tkinter as tk
+import os
 
 
 OUTPUT_PATH = Path(__file__).parent
@@ -54,6 +55,33 @@ pi = Image.open(io.BytesIO(im))
 # Save as PNG, or JPEG
 pi.save("build_demo1/assets/cover.png")
 
+def round_edges(im, radius):
+    mask = Image.new("L", (radius * 2, radius * 2), 0)
+    draw = ImageDraw.Draw(mask)
+    draw.ellipse((0, 0, radius * 2, radius * 2), fill=255)
+
+    alpha = Image.new("L", im.size, 255)
+    w, h = im.size
+
+    alpha.paste(mask.crop((0, 0, radius, radius)), box=(0, 0))
+    alpha.paste(mask.crop((0, radius, radius, radius * 2)), box=(0, h - radius))
+    alpha.paste(mask.crop((radius, 0, radius * 2, radius)), box=(w - radius, 0))
+    alpha.paste(mask.crop((radius, radius, radius * 2, radius * 2)), box=(w - radius, h - radius))
+
+    im.putalpha(alpha)
+    return im
+
+if __name__ == "__main__":
+    with Image.open('build_demo1/assets/cover.png') as im:
+
+        im = im.convert("RGBA")
+
+        rounded_im = round_edges(im, 100)
+        rounded_im.save('build_demo1/assets/cover_rounded.png')
+
+if os.path.exists('build_demo1/assets/cover.png'):
+    os.remove('build_demo1/assets/cover.png')
+
 #FONDO
 canvas.place(x = 0, y = 0)
 image_image_1 = ImageTk.PhotoImage(
@@ -66,7 +94,7 @@ image_1 = canvas.create_image(
 
 #PORTADA
 canvas.place(x = 0, y = 0)
-image_image_2 = (Image.open('build_demo1/assets/cover.png'))
+image_image_2 = (Image.open('build_demo1/assets/cover_rounded.png'))
 resize_image_image_2 = image_image_2.resize((200,200))
 image_image_2 = ImageTk.PhotoImage(resize_image_image_2)
 image_1 = canvas.create_image(
@@ -127,15 +155,15 @@ dot_image_2 = ImageTk.PhotoImage(file=relative_to_assets("dot_1.png"))
 dot_1 = canvas.create_image(561.6, 462.2, image=dot_image_2, tag='Dot_1')
 canvas.tag_bind(dot_1, "<Button>", lambda event: print('Dot_1 clicked'))
 
-#SPOTIFY
-button_image_2 = ImageTk.PhotoImage(file=relative_to_assets("button_2.png"))
-button_2 = canvas.create_image(464, 45.6, image=button_image_2, tag='Button_2')
-canvas.tag_bind(button_2, "<Button>", lambda event: print('Button_2 clicked'))
-
 #YOUTUBE
 button_image_1 = ImageTk.PhotoImage(file=relative_to_assets("button_1.png"))
-button_1 = canvas.create_image(432, 45.6, image=button_image_1, tag='Button_1')
+button_1 = canvas.create_image(448, 45.6, image=button_image_1, tag='Button_1')
 canvas.tag_bind(button_1, "<Button>", lambda event: print('Button_1 clicked'))
+
+#SPOTIFY
+button_image_2 = ImageTk.PhotoImage(file=relative_to_assets("button_2.png"))
+button_2 = canvas.create_image(480, 45.6, image=button_image_2, tag='Button_2')
+canvas.tag_bind(button_2, "<Button>", lambda event: print('Button_2 clicked'))
 
 #BARRA BUSQUEDA
 entry_image_1 = ImageTk.PhotoImage(file=relative_to_assets("entry_1.png"))
@@ -143,7 +171,7 @@ entry_bg_1 = canvas.create_image(224, 45.6, image=entry_image_1)
 
 #BUSQUEDA
 button_image_7 = ImageTk.PhotoImage(file=relative_to_assets("button_7.png"))
-button_7 = canvas.create_image(36, 45.6, image=button_image_7, tag='Button_7')
+button_7 = canvas.create_image(32, 45.6, image=button_image_7, tag='Button_7')
 canvas.tag_bind(button_7, "<Button>", lambda event: print('Button_7 clicked'))
 
 #CANCIONES
