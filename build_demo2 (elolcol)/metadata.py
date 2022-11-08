@@ -12,7 +12,7 @@ im = AudioMetadata.get_image()
 
 pi = Image.open(io.BytesIO(im))
 
-pi.save("build_demo1/assets/cover.png")
+pi.save("build_demo2 (elolcol)/assets/cover.png")
 
 def round_edges(im, radius):
     mask = Image.new("L", (radius * 2, radius * 2), 0)
@@ -31,14 +31,14 @@ def round_edges(im, radius):
     return im
 
 if __name__ == "__main__":
-    with Image.open('build_demo1/assets/cover.png') as im:
+    with Image.open('build_demo2 (elolcol)/assets/cover.png') as im:
 
         im = im.convert("RGBA")
 
         rounded_im = round_edges(im, 100)
-        rounded_im.save('build_demo1/assets/cover_rounded.png')
+        rounded_im.save('build_demo2 (elolcol)/assets/cover_rounded.png')
 
-if os.path.exists('build_demo1/assets/cover.png'):
-    os.remove('build_demo1/assets/cover.png')
+if os.path.exists('build_demo2 (elolcol)/assets/cover.png'):
+    os.remove('build_demo2 (elolcol)/assets/cover.png')
 
         

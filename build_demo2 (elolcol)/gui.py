@@ -2,16 +2,11 @@
 # https://github.com/ParthJadhav/Tkinter-Designer
 
 from tkinter import *
-from tkinter import Entry, PhotoImage, Listbox, filedialog
-from PIL import Image, ImageTk, ImageDraw
+from tkinter import Entry, PhotoImage, Listbox, filedialog, messagebox
+from PIL import Image, ImageTk
 import tkinter as tk
 from pathlib import Path
-from tinytag import TinyTag
-import io
 import os
-
-
-
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path("./assets")
@@ -46,42 +41,6 @@ image_1 = canvas.create_image(
     image=image_image_1
 )
 
-song = filedialog.askopenfilename(initialdir='Music', title='Choose a music', filetypes=(('mp3 files', '*.mp3'), ))
-
-AudioMetadata = TinyTag.get(song, image=True)
-
-im = AudioMetadata.get_image()
-
-pi = Image.open(io.BytesIO(im))
-
-pi.save("build_demo2 (elolcol)/assets/cover.png")
-
-def round_edges(im, radius):
-    mask = Image.new("L", (radius * 2, radius * 2), 0)
-    draw = ImageDraw.Draw(mask)
-    draw.ellipse((0, 0, radius * 2, radius * 2), fill=255)
-
-    alpha = Image.new("L", im.size, 255)
-    w, h = im.size
-
-    alpha.paste(mask.crop((0, 0, radius, radius)), box=(0, 0))
-    alpha.paste(mask.crop((0, radius, radius, radius * 2)), box=(0, h - radius))
-    alpha.paste(mask.crop((radius, 0, radius * 2, radius)), box=(w - radius, 0))
-    alpha.paste(mask.crop((radius, radius, radius * 2, radius * 2)), box=(w - radius, h - radius))
-
-    im.putalpha(alpha)
-    return im
-
-if __name__ == "__main__":
-    if os.path.exists('build_demo2 (elolcol)/assets/cover.png'):
-        with Image.open('build_demo2 (elolcol)/assets/cover.png') as im:
-
-            im = im.convert("RGBA")
-
-            rounded_im = round_edges(im, 100)
-            rounded_im.save('build_demo2 (elolcol)/assets/cover_rounded.png')
-
-
 #CANCIONES
 entry_image_2 = PhotoImage(file=relative_to_assets("entry_2.png"))
 entry_bg_2 = canvas.create_image(256, 323.6, image=entry_image_2)
@@ -100,9 +59,14 @@ canvas.place(x = 0, y = 0)
 if os.path.exists('build_demo2 (elolcol)/assets/cover_rounded.png'):
     if os.path.exists('build_demo2 (elolcol)/assets/cover.png'):
         os.remove('build_demo2 (elolcol)/assets/cover.png')
-    image_image_2 = (Image.open('build_demo2 (elolcol)/assets/cover_rounded.png'))
+    image_image_2 = (Image.open('build_demo2 (elolcol)/assets/cover_rounded.png')) 
 else:
     image_image_2 = (Image.open('build_demo2 (elolcol)/assets/image_2.png'))
+
+def on_closing():
+    if os.path.exists('build_demo2 (elolcol)/assets/cover_rounded.png'):
+        os.remove('build_demo2 (elolcol)/assets/cover_rounded.png')
+    window.destroy()
 
 resize_image_image_2 = image_image_2.resize((200,200))
 image_image_2 = ImageTk.PhotoImage(resize_image_image_2)
@@ -117,7 +81,7 @@ canvas.create_text(
     540.0,
     296.7,
     anchor="nw",
-    text=AudioMetadata.title,
+    text="",
     fill="#FFFFFF",
     font=("Inter", 18)
 )
@@ -127,7 +91,7 @@ canvas.create_text(
     540.0,
     334.6,
     anchor="nw",
-    text=AudioMetadata.artist,
+    text="",
     fill="#FFFFFF",
     font=("Inter", 18)
 )
@@ -137,7 +101,7 @@ canvas.create_text(
     540.0,
     372.1,
     anchor="nw",
-    text=AudioMetadata.album,
+    text="",
     fill="#FFFFFF",
     font=("Inter", 18)
 )
@@ -147,7 +111,7 @@ canvas.create_text(
     540.0,
     407.9,
     anchor="nw",
-    text=AudioMetadata.year,
+    text="",
     fill="#FFFFFF",
     font=("Inter", 18)
 )
@@ -206,7 +170,7 @@ canvas.tag_bind(button_3, "<Button>", lambda event: print('Button_3 clicked'))
 #PAUSA
 button_image_4 = ImageTk.PhotoImage(file=relative_to_assets("Button_4.png"))
 button_4 = canvas.create_image(640, 493.5, image=button_image_4, tag='Button_4')
-canvas.tag_bind(button_4, "<Button>", lambda event: print('Button_4 clicked'))
+canvas.tag_bind(button_4, "<Button>", lambda e: print("play"))
 
 #SIGUIENTE
 button_image_6 = ImageTk.PhotoImage(file=relative_to_assets("button_6.png"))
@@ -219,4 +183,5 @@ button_8 = canvas.create_image(523.9, 549.8, image=button_image_8, tag='Button_8
 canvas.tag_bind(button_8, "<Button>", lambda e: add_song())
 
 window.resizable(False, False)
+window.protocol("WM_DELETE_WINDOW", on_closing)
 window.mainloop()

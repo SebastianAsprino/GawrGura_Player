@@ -5,6 +5,7 @@ import tkinter as tk
 from pathlib import Path
 from tinytag import TinyTag
 import io
+import os
 
 
 window = Tk()
@@ -56,10 +57,10 @@ def play():
     song = song_box.get(ACTIVE)
     song = f'C:/Users/canzi/Desktop/Music_Player/Music/{song}.mp3'
 
-    playsound(song)
-
 button_image_6 = ImageTk.PhotoImage(file=relative_to_assets("button_5.png"))
 button_6 = canvas.create_image(74, 32, image=button_image_6, tag='Button_6')
 canvas.tag_bind(button_6, "<Button>", lambda e: play())
+
+
 
 window.mainloop()
