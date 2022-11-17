@@ -14,186 +14,119 @@ ASSETS_PATH = OUTPUT_PATH / Path("./assets")
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
-"""window = tk.Tk()
-
-window.geometry('800x600')
-window.configure(bg = "#FFFFFF")
-window.title("Music Player")
-window.iconbitmap(".image/gura.ico")
-
-
-canvas = tk.Canvas(
-    window,
-    bg = "#FFFFFF",
-    height = 800,
-    width = 800,
-    bd = 0,
-    highlightthickness = 0,
-    relief = "ridge"
-)
-
-#FONDO
-canvas.place(x = 0, y = 0)
-image_image_1 = ImageTk.PhotoImage(file=relative_to_assets("image_1.png"))
-image_1 = canvas.create_image(
-    400.0,
-    300.0,
-    image=image_image_1
-)
-
-#CANCIONES
-entry_image_2 = PhotoImage(file=relative_to_assets("entry_2.png"))
-entry_bg_2 = canvas.create_image(256, 323.6, image=entry_image_2)
-
-def add_song():
-    song = filedialog.askopenfilename(initialdir='Music', title='Choose a music', filetypes=(('mp3 files', '*.mp3'), ))
-    song_box.insert(END, song)
-
-song_box = Listbox(window, bg="white", fg="green")
-song_box.pack(side="left", padx=150, pady=150)
-song_box.config(relief="flat", bd=0, width=150, height=150)
-
-#PORTADA
-canvas.place(x = 0, y = 0)
-
-if os.path.exists('build_demo2 (elolcol)/assets/cover_rounded.png'):
-    if os.path.exists('build_demo2 (elolcol)/assets/cover.png'):
-        os.remove('build_demo2 (elolcol)/assets/cover.png')
-    image_image_2 = (Image.open('build_demo2 (elolcol)/assets/cover_rounded.png')) 
-else:
-    image_image_2 = (Image.open('build_demo2 (elolcol)/assets/image_2.png'))
-
-def on_closing():
-    if os.path.exists('build_demo2 (elolcol)/assets/cover_rounded.png'):
-        os.remove('build_demo2 (elolcol)/assets/cover_rounded.png')
-    window.destroy()
-
-resize_image_image_2 = image_image_2.resize((200,200))
-image_image_2 = ImageTk.PhotoImage(resize_image_image_2)
-image_1 = canvas.create_image(
-    640.0,
-    156.0,
-    image=image_image_2
-)
-
-#NOMBRE
-canvas.create_text(
-    540.0,
-    296.7,
-    anchor="nw",
-    text="",
-    fill="#FFFFFF",
-    font=("Inter", 18)
-)
-
-#ARTISTA
-canvas.create_text(
-    540.0,
-    334.6,
-    anchor="nw",
-    text="",
-    fill="#FFFFFF",
-    font=("Inter", 18)
-)
-
-#ALBUM
-canvas.create_text(
-    540.0,
-    372.1,
-    anchor="nw",
-    text="",
-    fill="#FFFFFF",
-    font=("Inter", 18)
-)
-
-#AÑO
-canvas.create_text(
-    540.0,
-    407.9,
-    anchor="nw",
-    text="",
-    fill="#FFFFFF",
-    font=("Inter", 18)
-)
-
-#BARRA_REPRODUCCION
-canvas.place(x = 0, y = 0)
-bar_image_1 = ImageTk.PhotoImage(file=relative_to_assets("bar_1.png"))
-image_1 = canvas.create_image(640.0, 462.2, image=bar_image_1)
-
-canvas.place(x = 0, y = 0)
-bar_image_2 = ImageTk.PhotoImage(file=relative_to_assets("bar_2.png"))
-image_1 = canvas.create_image(640.0, 462.2, image=bar_image_2)
-
-dot_image_2 = ImageTk.PhotoImage(file=relative_to_assets("dot_1.png"))
-dot_1 = canvas.create_image(561.6, 462.2, image=dot_image_2, tag='Dot_1')
-canvas.tag_bind(dot_1, "<Button>", lambda event: print('Dot_1 clicked'))
-
-#YOUTUBE
-button_image_1 = ImageTk.PhotoImage(file=relative_to_assets("button_1.png"))
-button_1 = canvas.create_image(448, 45.6, image=button_image_1, tag='Button_1')
-canvas.tag_bind(button_1, "<Button>", lambda event: print('Button_1 clicked'))
-
-#SPOTIFY
-button_image_2 = ImageTk.PhotoImage(file=relative_to_assets("button_2.png"))
-button_2 = canvas.create_image(480, 45.6, image=button_image_2, tag='Button_2')
-canvas.tag_bind(button_2, "<Button>", lambda event: print('Button_2 clicked'))
-
-#BARRA BUSQUEDA
-entry_image_1 = ImageTk.PhotoImage(file=relative_to_assets("entry_1.png"))
-entry_bg_1 = canvas.create_image(224, 45.6, image=entry_image_1)
-entry_1 = Entry(
-    bd=0,
-    bg="#E0E0E3",
-    highlightthickness=0,
-    cursor="xterm",
-    justify="left",
-    font=("UD Digi Kyokasho NK-R", 24 * -1)
-)
-entry_1.place(
-    x=50.0,
-    y=31.5,
-    width=368,
-    height=30.0
-)
-
-#BUSQUEDA
-button_image_7 = ImageTk.PhotoImage(file=relative_to_assets("button_7.png"))
-button_7 = canvas.create_image(32, 45.6, image=button_image_7, tag='Button_7')
-canvas.tag_bind(button_7, "<Button>", lambda event: print('Button_7 clicked'))
-
-#ANTERIOR
-button_image_3 = ImageTk.PhotoImage(file=relative_to_assets("button_3.png"))
-button_3 = canvas.create_image(604.5, 493.5, image=button_image_3, tag='Button_3')
-canvas.tag_bind(button_3, "<Button>", lambda event: print('Button_3 clicked'))
-
-#PAUSA
-button_image_4 = ImageTk.PhotoImage(file=relative_to_assets("Button_4.png"))
-button_4 = canvas.create_image(640, 493.5, image=button_image_4, tag='Button_4')
-canvas.tag_bind(button_4, "<Button>", lambda e: print("play"))
-
-#SIGUIENTE
-button_image_6 = ImageTk.PhotoImage(file=relative_to_assets("button_6.png"))
-button_6 = canvas.create_image(675.5, 493.5, image=button_image_6, tag='Button_6')
-canvas.tag_bind(button_6, "<Button>", lambda event: print('Button_6 clicked'))
-
-#AÑADIR ARCHIVO
-button_image_8 = ImageTk.PhotoImage(file=relative_to_assets("button_8.png"))
-button_8 = canvas.create_image(523.9, 549.8, image=button_image_8, tag='Button_8')
-canvas.tag_bind(button_8, "<Button>", lambda e: add_song())
-
-window.resizable(False, False)
-window.protocol("WM_DELETE_WINDOW", on_closing)
-window.mainloop()"""
-
 class gui:
     def __init__(self,app = None):
-        super().__init__(app)
         self.app = app
         self.app.geometry('800x600')
         self.app.configure(bg = "#FFFFFF")
         self.app.title("Music Player")
         self.app.iconbitmap(".image/gura.ico")
+        self.canvas = tk.Canvas(self.app,bg = "#FFFFFF", height = 800, width = 800, bd = 0, highlightthickness = 0, relief = "ridge")
+        #FONDO
+        self.canvas.place(x = 0, y = 0)
+        self.image_image_1 = ImageTk.PhotoImage(file=relative_to_assets("image_1.png"))
+        self.image_1 = self.canvas.create_image(400.0, 300.0, image=self.image_image_1)
+        #CANCIONES
+        self.entry_image_2 = PhotoImage(file=relative_to_assets("entry_2.png"))
+        self.entry_bg_2 = self.canvas.create_image(256, 323.6, image=self.entry_image_2)
+
+        def add_song():
+            song = filedialog.askopenfilename(initialdir='Music', title='Choose a music', filetypes=(('mp3 files', '*.mp3'), ))
+            song_box.insert(END, song)
+
+        song_box = Listbox(self.app, bg="white", fg="green")
+        song_box.pack(side="left", padx=150, pady=150)
+        song_box.config(relief="flat", bd=0, width=150, height=150)
+
+        """#PORTADA
+        self.canvas.place(x = 0, y = 0)
+
+        if os.path.exists('build_demo2 (elolcol)/assets/cover_rounded.png'):
+            if os.path.exists('build_demo2 (elolcol)/assets/cover.png'):
+                os.remove('build_demo2 (elolcol)/assets/cover.png')
+            self.image_image_2 = (Image.open('build_demo2 (elolcol)/assets/cover_rounded.png')) 
+        else:
+            self.image_image_2 = (Image.open('build_demo2 (elolcol)/assets/image_2.png'))
+
+        def on_closing():
+            if os.path.exists('build_demo2 (elolcol)/assets/cover_rounded.png'):
+                os.remove('build_demo2 (elolcol)/assets/cover_rounded.png')
+        self.app.destroy()
+
+        self.resize_image_image_2 = self.image_image_2.resize((200,200))
+        self.image_image_2 = ImageTk.PhotoImage(self.resize_image_image_2)
+        self.image_1 = self.canvas.create_image(640.0, 156.0, image=self.image_image_2)
+"""
+        #NOMBRE
+        self.canvas.create_text( 540.0, 296.7, anchor="nw", text="Nombre", fill="#FFFFFF", font=("Inter", 18))
+
+        #ARTISTA
+        self.canvas.create_text( 540.0, 334.6, anchor="nw", text="Artista", fill="#FFFFFF", font=("Inter", 18))
+
+        #ALBUM
+        self.canvas.create_text( 540.0, 372.1, anchor="nw", text="Album", fill="#FFFFFF", font=("Inter", 18))
+
+        #AÑO
+        self.canvas.create_text( 540.0, 407.9, anchor="nw", text="Año", fill="#FFFFFF", font=("Inter", 18))
+
+        #BARRA_REPRODUCCION
+        self.canvas.place(x = 0, y = 0)
+        self.bar_image_1 = ImageTk.PhotoImage(file=relative_to_assets("bar_1.png"))
+        self.image_1 = self.canvas.create_image(640.0, 462.2, image=self.bar_image_1)
+
+        self.canvas.place(x = 0, y = 0)
+        self.bar_image_2 = ImageTk.PhotoImage(file=relative_to_assets("bar_2.png"))
+        self.image_1 = self.canvas.create_image(640.0, 462.2, image=self.bar_image_2)
+
+        self.dot_image_2 = ImageTk.PhotoImage(file=relative_to_assets("dot_1.png"))
+        self.dot_1 = self.canvas.create_image(561.6, 462.2, image=self.dot_image_2, tag='Dot_1')
+        self.canvas.tag_bind(self.dot_1, "<Button>", lambda event: print('Dot_1 clicked'))
+
+        #YOUTUBE
+        self.button_image_1 = ImageTk.PhotoImage(file=relative_to_assets("button_1.png"))
+        self.button_1 = self.canvas.create_image(448, 45.6, image=self.button_image_1, tag='Button_1')
+        self.canvas.tag_bind(self.button_1, "<Button>", lambda event: print('Button_1 clicked'))
+
+        #SPOTIFY
+        self.button_image_2 = ImageTk.PhotoImage(file=relative_to_assets("button_2.png"))
+        self.button_2 = self.canvas.create_image(480, 45.6, image=self.button_image_2, tag='Button_2')
+        self.canvas.tag_bind(self.button_2, "<Button>", lambda event: print('Button_2 clicked'))
+
+        #BARRA BUSQUEDA
+        self.entry_image_1 = ImageTk.PhotoImage(file=relative_to_assets("entry_1.png"))
+        self.entry_bg_1 = self.canvas.create_image(224, 45.6, image=self.entry_image_1)
+        self.entry_1 = Entry( bd=0, bg="#E0E0E3", highlightthickness=0, cursor="xterm", justify="left", font=("UD Digi Kyokasho NK-R", 24 * -1))
+        self.entry_1.place( x=50.0, y=31.5, width=368, height=30.0)
+
+        #BUSQUEDA
+        self.button_image_7 = ImageTk.PhotoImage(file=relative_to_assets("button_7.png"))
+        self.button_7 = self.canvas.create_image(32, 45.6, image=self.button_image_7, tag='Button_7')
+        self.canvas.tag_bind(self.button_7, "<Button>", lambda event: print('Button_7 clicked'))
+
+        #ANTERIOR
+        self.button_image_3 = ImageTk.PhotoImage(file=relative_to_assets("button_3.png"))
+        self.button_3 = self.canvas.create_image(604.5, 493.5, image=self.button_image_3, tag='Button_3')
+        self.canvas.tag_bind(self.button_3, "<Button>", lambda event: print('Button_3 clicked'))
+
+        #PAUSA
+        self.button_image_4 = ImageTk.PhotoImage(file=relative_to_assets("Button_4.png"))
+        self.button_4 = self.canvas.create_image(640, 493.5, image=self.button_image_4, tag='Button_4')
+        self.canvas.tag_bind(self.button_4, "<Button>", lambda e: print("play"))
+
+        #SIGUIENTE
+        self.button_image_6 = ImageTk.PhotoImage(file=relative_to_assets("button_6.png"))
+        self.button_6 = self.canvas.create_image(675.5, 493.5, image=self.button_image_6, tag='Button_6')
+        self.canvas.tag_bind(self.button_6, "<Button>", lambda event: print('Button_6 clicked'))
+
+        #AÑADIR ARCHIVO
+        self.button_image_8 = ImageTk.PhotoImage(file=relative_to_assets("button_8.png"))
+        self.button_8 = self.canvas.create_image(523.9, 549.8, image=self.button_image_8, tag='Button_8')
+        self.canvas.tag_bind(self.button_8, "<Button>", lambda e: add_song())
+
+        self.app.resizable(False, False)
+        #self.app.protocol("WM_DELETE_WINDOW", on_closing)
+        self.app.mainloop()
+        
 
 
 
@@ -201,4 +134,4 @@ class gui:
 
 if __name__ == "__main__":
     App = gui(app = tk.Tk())
-    App.mainloop()
+    
