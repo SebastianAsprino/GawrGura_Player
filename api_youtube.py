@@ -1,4 +1,4 @@
-
+"""
 from googleapiclient.discovery import build
 
 api_key = 'AIzaSyAv17jQbyO0zjmK4op2yDJ7RLExHLcigNs'
@@ -12,4 +12,9 @@ request = youtube.channels().list(
     
 response = request.execute()
 
-print(response)
+print(response)"""
+class api_youtube:
+    """Es el api de youtube inicia sesion"""
+    
+    
+    pass
