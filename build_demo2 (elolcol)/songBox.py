@@ -37,7 +37,7 @@ pi = Image.open(io.BytesIO(im))
 
 def add_song():
     song = filedialog.askopenfilename(initialdir='Music', title='Choose a music', filetypes=(('mp3 files', '*.mp3'), ))
-    song = song.replace('/home/eduardo/Escritorio/GawrGura_Player/Music/', "")
+    song = song.replace('\Music', "")
     song = song.replace('.mp3', "")
     song_box.insert(END, song)
     
@@ -55,7 +55,7 @@ canvas.tag_bind(button_7, "<Button>", lambda e: add_song())
 
 def play_song():
     song = song_box.get(ACTIVE)
-    song = f'/home/eduardo/Escritorio/GawrGura_Player/Music/{song}.mp3'
+    song = f'\Music\{song}.mp3'
 
     pygame.mixer.music.load(song)
     pygame.mixer.music.play(loops=0)

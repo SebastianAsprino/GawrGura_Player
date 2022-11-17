@@ -14,7 +14,7 @@ ASSETS_PATH = OUTPUT_PATH / Path("./assets")
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
-window = tk.Tk()
+"""window = tk.Tk()
 
 window.geometry('800x600')
 window.configure(bg = "#FFFFFF")
@@ -184,4 +184,21 @@ canvas.tag_bind(button_8, "<Button>", lambda e: add_song())
 
 window.resizable(False, False)
 window.protocol("WM_DELETE_WINDOW", on_closing)
-window.mainloop()
+window.mainloop()"""
+
+class gui:
+    def __init__(self,app = None):
+        super().__init__(app)
+        self.app = app
+        self.app.geometry('800x600')
+        self.app.configure(bg = "#FFFFFF")
+        self.app.title("Music Player")
+        self.app.iconbitmap(".image/gura.ico")
+
+
+
+
+
+if __name__ == "__main__":
+    App = gui(app = tk.Tk())
+    App.mainloop()
