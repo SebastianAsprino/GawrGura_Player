@@ -1,7 +1,23 @@
-# MUSIC_PLAYER
-## este es un demo del primer archivo a cargar del reproductor de musica.
-## esta es una actualizacion del readme en la cual se incorpora en el git de los primeros demos de la interfaz grafica.
+# GARWGURA PLAYER
+## la intencion de este poryecto es crear un reproductor para youtube y spotify que permita estar en ambas plataformas al tiempo
+
+***
+inspirado en la vtuber de hololive garw gura
+![image]()
+***
+**idea del proyecto**
+![image]()
+
 ***
 ***
-***
-## desde este punto no llamare los commit por numero sino por lo que se implementa, dicho esto en este organizare archivos y las carpetas para implementar el api de spotify.
+*Referencias*
+
+### Tkinter-Designer https://github.com/ParthJadhav/Tkinter-Designer 
+### librerias utilizadas 
++ pytube
++ tkinter
++ PIL
++ tkinter
++ pathlib
++ webbrowser
++ os 

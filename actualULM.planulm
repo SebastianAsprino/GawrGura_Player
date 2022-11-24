@@ -1,0 +1,25 @@
+@startuml
+class songBox{
+__init__()
+add_song()
+play_song()
+}
+protocol api_spotify{
+
+}
+protocol api_youtube{
+recibe_url(entrada)
+descargar(vi)
+}
+
+interface gui{
+__init__()
+add_song()
+play_song()
+recibe(self,stri)
+}
+
+
+api_youtube <--* gui : le envia la url dada por el usuario
+object run 
+@enduml
