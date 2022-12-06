@@ -8,8 +8,9 @@ from tkinter import *
 from tkinter import Entry, PhotoImage, Listbox, filedialog, messagebox
 from PIL import Image, ImageTk
 import tkinter as tk
+import psutil
 from pathlib import Path
-import os
+from pygame import mixer
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path("./assets")
@@ -17,16 +18,14 @@ ASSETS_PATH = OUTPUT_PATH / Path("./assets")
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
+mixer.init()
+
 class songBox:
-    
     """clase de testeo"""
     def __init__ (self):
         self.songbox = tk.Tk()
         self.songbox.geometry("500x500")
         self.canvas = tk.Canvas(self.songbox, bg = "#FFFFFF", height = 800, width = 800, bd = 0, highlightthickness = 0, relief = "ridge")
-        self.AudioMetadata = TinyTag.get('Music/14-I-Will-Sing.mp3', image=True)
-        self.im = self.AudioMetadata.get_image()
-        self.pi = Image.open(io.BytesIO(self.im))
         self.canvas.place(x = 0, y = 0)
         self.entry_image_2 = PhotoImage(file=relative_to_assets("entry_2.png"))
         self.entry_bg_2 = self.canvas.create_image(250, 250, image=self.entry_image_2)
@@ -42,16 +41,24 @@ class songBox:
         self.songbox.mainloop()
     
     def add_song(self):
-        self.song = filedialog.askopenfilename(initialdir='Music', title='Choose a music', filetypes=(('mp3 files', '*.mp3'), ))
-        self.song = self.song.replace('\Music', "")
-        self.song = self.song.replace('.mp3', "")
-        self.song_box.insert(END, self.song)
+        self.user_info = psutil.users()
+        self.user = self.user_info[0][0]
+        self.song = filedialog.askopenfilenames(initialdir='Music', title='Choose a music', filetypes=(('mp3 files', '*.mp3'), ))
+        
+        self.dir=(Path(__file__).parent.absolute())
+
+        for song in self.song:
+            song = song.replace(str(self.dir), "")
+            song = song.replace('.mp3', "")
+            self.song_box.insert(END, song)
     
     def play_song(self):
         self.song = self.song_box.get(ACTIVE)
         self.song = f'{self.song}.mp3'
-        print(self.song)
-        webbrowser.open(self.song)
+        mixer.music.load(self.song)
+        mixer.music.play(loops=0)
+        #print(self.song)
+        #webbrowser.open(self.song)
 
 if __name__ == '__main__':
     sonbox = songBox()
