@@ -1,10 +1,7 @@
 from pytube import YouTube
 import os
 class api_youtube:
-    """descarga la cancion de los servidores de youtube y luego nos permite seleccionar la cancion de youtube a reproducir"""
-    
-    
-    
+    #descarga la cancion de los servidores de youtube a partir de un link
     def recibe_url(self,entrada):
         self.url = entrada
         print(self.url)
@@ -18,7 +15,7 @@ class api_youtube:
         name = os.path.splitext(self.out_path)
         print('..........descargando la cancion..........')
         os.rename(self.out_path, name[0]+'.mp3')
-        print('..........la cancion ya se descargo..........')
+        print('.........la cancion ya se descargo........')
 
 
 

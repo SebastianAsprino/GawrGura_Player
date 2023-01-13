@@ -1,7 +1,7 @@
-from gui import gui
-
+from gui import *
 
 App = gui()
+
 
 
 
