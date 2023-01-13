@@ -115,7 +115,7 @@ class gui:
         #PAUSA
         self.button_image_4 = ImageTk.PhotoImage(file=relative_to_assets("Button_4.png"))
         self.button_4 = self.canvas.create_image(640, 493.5, image=self.button_image_4, tag='Button_4')
-        self.canvas.tag_bind(self.button_4, "<Button>", lambda e: print("play"))
+        self.canvas.tag_bind(self.button_4, "<Button>", lambda e: self.play_song())
 
         #SIGUIENTE
         self.button_image_6 = ImageTk.PhotoImage(file=relative_to_assets("button_6.png"))
