@@ -3,9 +3,13 @@
 
 ***
 inspirado en la vtuber de hololive garw gura
+
+
 ![image](https://github.com/SebastianAsprino/GawrGura_Player/blob/main/.image/OkrEBnTn_400x400.jpg)
 ***
 **idea del proyecto**
+
+
 ![image](https://github.com/SebastianAsprino/GawrGura_Player/blob/main/.image/052507.png)
 
 ***
