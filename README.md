@@ -1,7 +1,7 @@
 # GARWGURA PLAYER
+
 ## la intencion de este proyecto es crear un reproductor para youtube y spotify que permita estar en ambas plataformas al tiempo
 
-***
 inspirado en la vtuber de hololive garw gura
 
 ![image](https://github.com/SebastianAsprino/GawrGura_Player/blob/main/.image/OkrEBnTn_400x400.jpg)
